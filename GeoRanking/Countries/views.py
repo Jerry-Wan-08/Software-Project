@@ -5,11 +5,10 @@ from .models import Country
 
 def all_countries(request):
     countries = Country.objects.all().values()
-    template = loader.get_template('Countries/All_Countries.html')
     context = {
         'countries': countries,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'Countries/All_Countries.html', context)
 
 def country_detail(request, id):
     country = get_object_or_404(Country, id=id)
