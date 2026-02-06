@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Countries</h1>
+  
+<ul>
+  {% for x in mymembers %}
+    <li>{{ x.name }} - Capital: {{ x.capital }} - Currency: {{ x.currency }} - Safety Index: {{ x.safety_index }} </li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
