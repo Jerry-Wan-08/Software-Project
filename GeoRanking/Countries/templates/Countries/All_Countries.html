@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Countries</title>
+</head>
 <body>
 
-<h1>Countries</h1>
-  
-<ul>
-  {% for x in mymembers %}
-    <li>{{ x.name }} - Capital: {{ x.capital }} - Currency: {{ x.currency }} - Safety Index: {{ x.safety_index }} </li>
-  {% endfor %}
-</ul>
+    <h1>All Countries</h1>
+
+    {% if countries %}
+        <ul>
+            {% for country in countries %}
+                <li>
+                    <a href="/Countries/{{ country.id }}/">
+                        {{ country.name }}
+                    </a>
+                    — Capital: {{ country.capital }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No countries have been added yet.</p>
+    {% endif %}
 
 </body>
 </html>
