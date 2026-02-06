@@ -1,4 +1,12 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.template import loader
+from .models import Country
 
-def Countries(request):
-    return render(request, "Countries/main.html")
+def all_countries(request):
+    countries = Country.objects.all().values()
+    template = loader.get_template('Countries/All_Countries.html')
+    context = {
+        'countries': countries,
+    }
+    return HttpResponse(template.render(context, request))
+
