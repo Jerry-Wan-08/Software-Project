@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Rate a Country</h2>
+<form method="post">
+  {% csrf_token %}
+  <select name="country">
+    {% for c in countries %}
+      <option value="{{ c.id }}">{{ c.name }}</option>
+    {% endfor %}
+  </select>
+  <input type="number" name="score" min="1" max="10">
+  <button>Submit</button>
+</form>
+{% endblock %}

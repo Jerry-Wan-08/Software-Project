@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GeoRankings</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <h1>🌍 GeoRankings</h1>
+  <nav>
+    <a href="/">Home</a>
+    {% if user.is_authenticated %}
+      <a href="/rate/">Rate Countries</a>
+      <a href="/logout/">Logout</a>
+    {% else %}
+      <a href="/login/">Login</a>
+      <a href="/register/">Register</a>
+    {% endif %}
+  </nav>
+</header>
+
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
