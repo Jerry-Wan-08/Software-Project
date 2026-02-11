@@ -3,9 +3,29 @@ from django.contrib.auth.models import User
 
 
 class Country(models.Model):
-  name = models.CharField(max_length=100)
+  name = models.CharField(max_length=100, unique=True)
 
+  safety_index = models.DecimalField(
+      max_digits=5,
+      decimal_places=2,
+      help_text="Safety index out of 100"
+  )
 
+  cost_index = models.DecimalField(
+      max_digits=5,
+      decimal_places=2,
+      help_text="Cost of living index (higher = more expensive)"
+  )
+
+  travel_rating = models.DecimalField(
+      max_digits=3,
+      decimal_places=1,
+      help_text="Overall travel rating out of 10"
+  )
+
+  def __str__(self):
+      return self.name
+    
 def __str__(self):
   return self.name
 
