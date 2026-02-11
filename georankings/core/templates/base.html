@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>GeoRankings</title>
-  <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>GeoRankings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<header>
-  <h1>🌍 GeoRankings</h1>
-  <nav>
-    <a href="/">Home</a>
-    {% if user.is_authenticated %}
-      <a href="/rate/">Rate Countries</a>
-      <a href="/logout/">Logout</a>
-    {% else %}
-      <a href="/login/">Login</a>
-      <a href="/register/">Register</a>
-    {% endif %}
-  </nav>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+<header class="bg-blue-600 text-white p-4 shadow">
+    <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-xl font-bold">🌍 GeoRankings</h1>
+        <nav>
+            <a href="/" class="px-3 py-1 hover:bg-blue-500 rounded">Home</a>
+            {% if user.is_authenticated %}
+                <a href="/rate/" class="px-3 py-1 hover:bg-blue-500 rounded">Rate Countries</a>
+                <a href="/logout/" class="px-3 py-1 hover:bg-blue-500 rounded">Logout</a>
+            {% else %}
+                <a href="/login/" class="px-3 py-1 hover:bg-blue-500 rounded">Login</a>
+                <a href="/register/" class="px-3 py-1 hover:bg-blue-500 rounded">Sign Up</a>
+            {% endif %}
+        </nav>
+    </div>
 </header>
 
-
-<main>
-  {% block content %}{% endblock %}
+<main class="flex-grow container mx-auto p-6">
+    {% block content %}{% endblock %}
 </main>
 </body>
 </html>

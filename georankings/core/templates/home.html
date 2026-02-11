@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Blog Posts</h2>
+<h2 class="text-xl font-bold mb-4">Blog Posts</h2>
 {% for post in posts %}
-  <article>
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.content }}</p>
-    <small>By {{ post.author }} | {{ post.created }}</small>
-  </article>
+<article class="bg-white p-4 mb-4 rounded shadow">
+    <h3 class="font-semibold text-lg">{{ post.title }}</h3>
+    <p class="mt-2">{{ post.content }}</p>
+    <small class="text-gray-500">By {{ post.author }} | {{ post.created }}</small>
+</article>
+{% empty %}
+<p>No posts yet.</p>
 {% endfor %}
+
+<h2 class="text-xl font-bold mt-8 mb-4">Countries</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {% for country in countries %}
+    <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold">{{ country.name }}</h3>
+        {% if country.average_user_rating %}
+            <p>Average Rating: {{ country.average_user_rating }}/10</p>
+        {% else %}
+            <p>No user ratings yet</p>
+        {% endif %}
+        <p>Safety Index: {{ country.safety_index }}</p>
+        <p>Cost Index: {{ country.cost_index }}</p>
+        <p>Travel Rating: {{ country.travel_rating }}</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
