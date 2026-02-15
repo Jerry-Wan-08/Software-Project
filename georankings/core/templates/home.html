@@ -1,29 +1,43 @@
 {% extends 'base.html' %}
+{% block title %}Home - GeoRankings{% endblock %}
 {% block content %}
-<h2 class="text-xl font-bold mb-4">Blog Posts</h2>
-{% for post in posts %}
-<article class="bg-white p-4 mb-4 rounded shadow">
-    <h3 class="font-semibold text-lg">{{ post.title }}</h3>
-    <p class="mt-2">{{ post.content }}</p>
-    <small class="text-gray-500">By {{ post.author }} | {{ post.created }}</small>
-</article>
-{% empty %}
-<p>No posts yet.</p>
-{% endfor %}
+<div class="mb-8">
+    <h2 class="text-2xl font-bold mb-4">Recent Blog Posts</h2>
+    <div class="space-y-4">
+        {% for post in posts|slice:":3" %}
+        <article class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold text-lg">
+                <a href="{% url 'blog_detail' post.id %}" class="text-blue-600 hover:underline">
+                    {{ post.title }}
+                </a>
+            </h3>
+            <p class="mt-2">{{ post.content|truncatewords:30 }}</p>
+            <small class="text-gray-500">By {{ post.author }} | {{ post.created|date:"F j, Y" }}</small>
+        </article>
+        {% empty %}
+        <p class="text-gray-500">No posts yet.</p>
+        {% endfor %}
+    </div>
+    <div class="mt-4">
+        <a href="{% url 'blog_list' %}" class="text-blue-600 hover:underline">View all posts →</a>
+    </div>
+</div>
 
-<h2 class="text-xl font-bold mt-8 mb-4">Countries</h2>
+<h2 class="text-2xl font-bold mt-8 mb-4">Countries</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     {% for country in countries %}
-    <div class="bg-white p-4 rounded shadow">
-        <h3 class="font-semibold">{{ country.name }}</h3>
-        {% if country.average_user_rating %}
-            <p>Average Rating: {{ country.average_user_rating }}/10</p>
-        {% else %}
-            <p>No user ratings yet</p>
-        {% endif %}
-        <p>Safety Index: {{ country.safety_index }}</p>
-        <p>Cost Index: {{ country.cost_index }}</p>
-        <p>Travel Rating: {{ country.travel_rating }}</p>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+        <h3 class="font-semibold text-lg mb-2">{{ country.name }}</h3>
+        <div class="space-y-1">
+            {% if country.average_user_rating %}
+                <p><span class="font-medium">User Rating:</span> {{ country.average_user_rating }}/10</p>
+            {% else %}
+                <p class="text-gray-500">No user ratings yet</p>
+            {% endif %}
+            <p><span class="font-medium">Safety Index:</span> {{ country.safety_index }}</p>
+            <p><span class="font-medium">Cost Index:</span> {{ country.cost_index }}</p>
+            <p><span class="font-medium">Travel Rating:</span> {{ country.travel_rating }}</p>
+        </div>
     </div>
     {% endfor %}
 </div>
